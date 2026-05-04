@@ -1,0 +1,5 @@
+# Local Netlify folder
+.env
+.netlify
+.playwright-cli/
+resources/~$*

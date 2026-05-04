@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M1 - Fondamenti di Python</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script defer src="../assets/js/site.js"></script>
+</head>
+<body id="top" data-page-lang="it">
+  <div id="google_translate_element" class="translate-host" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="shell">
+      <section class="hero">
+        <p><a href="../index.html">Home</a></p>
+        <h1>M1 - Fondamenti di Python</h1>
+        <p class="hero-copy">Primo modulo per installare Python, eseguire script e comprendere le istruzioni essenziali del linguaggio.</p>
+      </section>
+    </div>
+  </header>
+
+  <main class="shell module-layout">
+    <aside class="panel outline-panel" aria-label="Indice modulo">
+      <h2 class="outline-title">Indice</h2>
+      <nav id="outline-nav"></nav>
+    </aside>
+
+    <article class="module-main">
+      <section class="panel">
+        <nav class="module-nav" aria-label="Navigazione modulo">
+          <span>M1</span>
+          <a href="chapter-02.html">M2 Successivo</a>
+        </nav>
+      </section>
+
+      <section class="panel info-grid">
+        <div>
+          <h2>Obiettivi di apprendimento</h2>
+          <ul>
+            <li>Capire perche Python e usato in scenari reali.</li>
+            <li>Installare Python, aprire un notebook e lanciare uno script.</li>
+            <li>Usare `print()`, `input()`, `help()`, `dir()`, `type()`, `callable()` e `repr()`.</li>
+            <li>Scrivere codice con indentazione, variabili, commenti e operatori.</li>
+            <li>Gestire stringhe, container, funzioni, moduli ed eccezioni di base.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Prerequisiti</h2>
+          <p>Conoscenze informatiche di base: file, cartelle, editor di testo, terminale e concetto generale di programma.</p>
+          <p>Consigliato un ambiente con Jupyter o un editor come VS Code, oppure l'esecuzione diretta tramite notebook Colab.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>1. Introduzione e ambiente</h2>
+        <h3>1.1 Perche usare Python</h3>
+        <p>Python e leggibile, versatile e adatto ad automazione, analisi dati, scripting, integrazione con servizi esterni e prototipazione rapida.</p>
+        <p>Nel materiale delle erogazioni, il corso parte sempre da un'idea pratica: scrivere codice semplice, osservare come si comportano gli oggetti e costruire poi strumenti riutilizzabili.</p>
+        <h3>1.2 Casi d'uso reali</h3>
+        <ul>
+          <li>Automatizzare elaborazioni ripetitive su file e cartelle.</li>
+          <li>Leggere dati strutturati e trasformarli in report.</li>
+          <li>Interagire con API REST di servizi esterni.</li>
+          <li>Preparare script di supporto per attivita tecniche e operative.</li>
+        </ul>
+        <h3>1.3 Installazione ed esecuzione</h3>
+        <p>Python si installa come interprete locale oppure tramite distribuzioni come Anaconda e Miniconda. Per i moduli introduttivi sono rilevanti anche Visual Studio Code, le estensioni Python e l'ambiente Jupyter.</p>
+        <p>Per verificare l'installazione si usa un comando come <code>python --version</code> o <code>python3 --version</code>. Uno script viene eseguito passando il file `.py` all'interprete.</p>
+        <pre class="code-sample"><code>python hello.py</code></pre>
+        <h3>1.4 Bytecode, PVM e IDE</h3>
+        <p>Python traduce il sorgente in bytecode, una forma intermedia eseguita dalla Python Virtual Machine. Il punto importante, per chi inizia, e distinguere tra sorgente, interprete ed esecuzione.</p>
+        <p>IDLE e utile per prove rapide, ma nei materiali raccolti compaiono soprattutto notebook Jupyter e Colab come ambiente didattico. I notebook sono molto usati per prototipazione e per eseguire le celle in ordine non lineare.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/python-memory-model.png" alt="Schema del modello di memoria Python con stack, heap, riferimenti e oggetti di base.">
+          <figcaption><strong>Figura M1.1.</strong> Modello di memoria Python con stack, heap, riferimenti e oggetti condivisi. E la base mentale per capire variabili e mutabilita.</figcaption>
+        </figure>
+      </section>
+
+      <section class="panel">
+        <h2>2. Tipi base e oggetti</h2>
+        <h3>2.1 Oggetti, stack, heap e garbage collection</h3>
+        <p>Le erogazioni insistono sul fatto che in Python tutto e un oggetto: anche le funzioni. Le variabili sono riferimenti, non scatole rigide di memoria, e la raccolta dei rifiuti libera gli oggetti non piu raggiungibili.</p>
+        <p>Questo schema aiuta a leggere con naturalezza concetti come mutabilita, identita e condivisione dei riferimenti.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/python-pandas-memory-model.png" alt="Schema esteso del modello oggetti Python con stack, heap, stringhe, tuple, funzioni e riferimenti.">
+          <figcaption><strong>Figura M1.2.</strong> Schema esteso del modello a oggetti: funzioni, stringhe, tuple, riferimenti e memoria condivisa.</figcaption>
+        </figure>
+        <h3>2.2 Tipi base e built-in function</h3>
+        <p>Tra le funzioni di base ricorrenti ci sono `type()`, `callable()`, `repr()`, i costruttori dei tipi e gli oggetti della libreria standard. Nel corso si usa spesso `help()` e `dir()` per esplorare i tipi standard e i loro metodi.</p>
+        <p>Le note raccolte citano in particolare la documentazione sui tipi built-in e la libreria standard come riferimento principale per l'esplorazione autonoma.</p>
+      </section>
+
+      <section class="panel">
+        <h2>3. Container e stringhe</h2>
+        <h3>3.1 Ordinati e non ordinati</h3>
+        <p>Il corso distingue tra sequenze ordinate e contenitori non ordinati. Le stringhe, le liste e le tuple sono sequenze; set e dizionari hanno comportamenti diversi e sono fondamentali per deduplicare, cercare e associare dati.</p>
+        <h3>3.2 Mutabili e immutabili</h3>
+        <p>Le stringhe e le tuple non si modificano in place; liste, set e dizionari invece si possono aggiornare. Questo punto torna piu volte negli appunti, anche quando si ragiona su riferimenti e copie.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/python-set-intersection.png" alt="Esempio di intersezione tra insiemi e confronto con il doppio ciclo sui contenitori.">
+          <figcaption><strong>Figura M1.3.</strong> Gli insiemi permettono operazioni come l'intersezione senza ricorrere a doppi cicli manuali.</figcaption>
+        </figure>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/python-container-grid.png" alt="Schema a griglia di contenitori e posizioni che richiama l'indicizzazione di sequenze.">
+          <figcaption><strong>Figura M1.4.</strong> Rappresentazione schematica delle posizioni nei contenitori e dell'accesso per indice.</figcaption>
+        </figure>
+        <h3>3.3 Stringhe</h3>
+        <p>Le stringhe supportano Unicode e offrono metodi ricorrenti per pulizia, ricerca, trasformazione e formattazione. Gli appunti richiamano in modo esplicito la documentazione su `str` e sul mini-linguaggio di formattazione.</p>
+        <p>Nel materiale emerge anche il pattern del formatting moderno con `format()` e delle sequenze di escape per costruire output leggibili.</p>
+      </section>
+
+      <section class="panel">
+        <h2>4. Funzioni e controllo del flusso</h2>
+        <h3>4.1 Definizione, argomenti e scope</h3>
+        <p>Le funzioni sono presentate come oggetti a tutti gli effetti. La lezione insiste su argomenti posizionali, keyword, default, valore restituito e scope locale, con attenzione al fatto che le funzioni possono essere passate come parametri ad altre funzioni.</p>
+        <p>Tra le varianti ricorrenti compaiono le lambda, l'uso di `enumerate`, `zip` e le funzioni di ordinamento con chiave.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/python-lambda-sorting.png" alt="Esempio di ordinamento di coppie con funzione esplicita e lambda.">
+          <figcaption><strong>Figura M1.5.</strong> Le lambda sono usate come funzioni anonime, per esempio nelle chiavi di ordinamento.</figcaption>
+        </figure>
+        <h3>4.2 Cicli, accumulo e comprehension</h3>
+        <p>I pattern piu ripetuti negli appunti sono il ciclo ad accumulo, il loop su range, la scansione di una lista con indice e le comprehension per creare nuove collezioni in modo compatto.</p>
+        <h3>4.3 Esempio di stile idiomatico</h3>
+        <pre class="code-sample"><code>pairs = [(3, "three"), (2, "two"), (1, "one")]
+pairs.sort(key=lambda item: item[1])</code></pre>
+      </section>
+
+      <section class="panel">
+        <h2>5. Moduli, eccezioni e librerie</h2>
+        <h3>5.1 Moduli</h3>
+        <p>I moduli sono il modo naturale per esternalizzare funzioni riutilizzabili. Negli appunti compaiono esempi con file locali come <code>fibo.py</code>, oltre all'uso della standard library tramite alias come <code>import statistics as stat</code>.</p>
+        <h3>5.2 Librerie esterne</h3>
+        <p>Le librerie come NumPy e Pandas si installano con il package manager e si verificano con <code>pip list</code>. Nei materiali delle erogazioni questo punto e esplicitato per chiarire la differenza tra libreria standard e pacchetti da installare.</p>
+        <h3>5.3 Eccezioni</h3>
+        <p>Il blocco <code>try</code> / <code>except</code> serve a gestire errori attesi senza interrompere subito il programma. E un tema ricorrente in lettura file, conversioni di tipo e interazione con risorse esterne.</p>
+        <p>Gli appunti citano anche la gestione delle connessioni e degli input non affidabili come casi d'uso naturali.</p>
+      </section>
+
+      <section class="panel">
+        <h2>6. Materiali e riferimenti</h2>
+        <p>Questa sezione raccoglie i link emersi dalle erogazioni e utile come base di studio e di esercitazione.</p>
+        <ul>
+          <li><a href="https://docs.python.org/3/tutorial/index.html" target="_blank" rel="noopener noreferrer">Python Tutorial</a></li>
+          <li><a href="https://docs.python.org/3/library/index.html" target="_blank" rel="noopener noreferrer">Standard Library</a></li>
+          <li><a href="https://docs.python.org/3/library/stdtypes.html" target="_blank" rel="noopener noreferrer">Built-in Types</a></li>
+          <li><a href="https://docs.python.org/3/library/stdtypes.html#text-sequence-type-str" target="_blank" rel="noopener noreferrer">Manipulating a String</a></li>
+          <li><a href="https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range" target="_blank" rel="noopener noreferrer">Sequence Types</a></li>
+          <li><a href="https://docs.python.org/3/library/string.html#format-specification-mini-language" target="_blank" rel="noopener noreferrer">Format Specification Mini-Language</a></li>
+          <li><a href="https://docs.python.org/3/library/string.html#format-string-syntax" target="_blank" rel="noopener noreferrer">Format String Syntax</a></li>
+          <li><a href="https://docs.anaconda.com/anaconda/install/" target="_blank" rel="noopener noreferrer">Installare Anaconda</a></li>
+          <li><a href="https://docs.anaconda.com/miniconda/install/" target="_blank" rel="noopener noreferrer">Installare Miniconda</a></li>
+          <li><a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a></li>
+          <li><a href="https://jupyter.org/" target="_blank" rel="noopener noreferrer">Jupyter</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/real-world-machine-learning/blob/python3/learning-python3.ipynb" target="_blank" rel="noopener noreferrer">Notebook introduttivo Python</a></li>
+          <li><a href="https://drive.google.com/drive/folders/1mx5mF5XwZOv5-1_G8SowONp4vF8-bupv?usp=sharing" target="_blank" rel="noopener noreferrer">Cartella materiali e slide</a></li>
+          <li><a href="https://drive.google.com/file/d/1jO22P6Iy49KYoKyNjdCrIy3TcXlpls0S/view?usp=sharing" target="_blank" rel="noopener noreferrer">Disegnini e mappe del corso</a></li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Laboratorio guidato</h2>
+        <h3>Esercizio</h3>
+        <p>Creare uno script che chiede nome, anno di nascita e citta, calcola un'eta indicativa, formatta il risultato e mostra come la funzione cambia comportamento con argomenti diversi.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Riepilogo</h2>
+        <ul>
+          <li>Python si legge bene se si capisce il modello oggetti, i riferimenti e la mutabilita.</li>
+          <li>Container, stringhe, funzioni e moduli sono il nucleo operativo del linguaggio.</li>
+          <li>Notebook, documentazione e librerie standard sono parte integrante del percorso introduttivo.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

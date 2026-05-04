@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M2 - Strutture dati, logica e file</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script defer src="../assets/js/site.js"></script>
+</head>
+<body id="top" data-page-lang="it">
+  <div id="google_translate_element" class="translate-host" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="shell">
+      <section class="hero">
+        <p><a href="../index.html">Home</a></p>
+        <h1>M2 - Strutture dati, logica e file</h1>
+        <p class="hero-copy">Modulo operativo su collezioni, decisioni, cicli, file, funzioni, moduli ed eccezioni.</p>
+      </section>
+    </div>
+  </header>
+
+  <main class="shell module-layout">
+    <aside class="panel outline-panel" aria-label="Indice modulo">
+      <h2 class="outline-title">Indice</h2>
+      <nav id="outline-nav"></nav>
+    </aside>
+
+    <article class="module-main">
+      <section class="panel">
+        <nav class="module-nav" aria-label="Navigazione modulo">
+          <a href="chapter-01.html">M1 Precedente</a>
+          <span>M2</span>
+          <a href="chapter-03.html">M3 Successivo</a>
+        </nav>
+      </section>
+
+      <section class="panel info-grid">
+        <div>
+          <h2>Obiettivi di apprendimento</h2>
+          <ul>
+            <li>Scegliere tra liste, tuple, dizionari e set.</li>
+            <li>Usare `if`, `elif`, `else`, `for`, `while` e comprehension.</li>
+            <li>Leggere e scrivere file testuali e strutturati.</li>
+            <li>Capire le basi di NumPy e Pandas per analisi dati in memoria.</li>
+            <li>Usare indexing, filtering, grouping, I/O e visualizzazione.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Output atteso</h2>
+          <p>Uno script o notebook capace di leggere dati, organizzarli in strutture Python, elaborarli con funzioni e salvarli o visualizzarli con Pandas.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>1. Numeri, costi e NumPy</h2>
+        <h3>1.1 Perche introdurre NumPy</h3>
+        <p>Nei materiali delle erogazioni NumPy entra subito dopo i fondamentali Python per mostrare come trattare array omogenei, tipi numerici controllati e operazioni vettoriali piu efficienti dei cicli manuali.</p>
+        <p>La terminologia ricorrente e quella di ndarray, shape, dimensione, array 1D/2D/3D e dtype, con particolare attenzione a <code>numpy.float64</code> e ai tipi numerici piu adatti al calcolo scientifico.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/python-big-o.png" alt="Curva di complessita con confronto tra O(1), O(log n), O(n), O(n log n), O(n^2) e O(2^n).">
+          <figcaption><strong>Figura M2.1.</strong> La crescita della complessita aiuta a capire quando una soluzione resta pratica e quando invece diventa costosa.</figcaption>
+        </figure>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/python-big-o-chart.png" alt="Grafico di complessita algoritmica con curve di runtime in funzione della dimensione di input.">
+          <figcaption><strong>Figura M2.2.</strong> Una seconda vista della complessita, utile per discutere di limiti, performance e scelte di implementazione.</figcaption>
+        </figure>
+        <h3>1.2 Creazione di array e broadcasting</h3>
+        <p>Gli appunti mostrano la creazione di array da liste, da intervalli, da generatori casuali e l'uso del broadcasting, descritto come una forma di espansione logica dei dati per applicare operazioni vettoriali a dimensionalita diverse.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/python-abstract-containers.png" alt="Rappresentazione astratta di range numerici e collezioni di valori con focus sui tipi numerici e sulle sequenze.">
+          <figcaption><strong>Figura M2.3.</strong> Rappresentazione astratta di intervalli e collezioni numeriche, utile per introdurre array e dati omogenei.</figcaption>
+        </figure>
+        <p>Quando i dati non stanno comodamente in memoria, gli appunti citano Dask, Hadoop e Spark come alternative per il calcolo distribuito.</p>
+      </section>
+
+      <section class="panel">
+        <h2>2. Modello dati di Pandas</h2>
+        <h3>2.1 Serie e DataFrame</h3>
+        <p>Pandas e presentato come libreria per data analysis, con un modello centrato su Series e DataFrame. Una Series e una sequenza indicizzata di valori omogenei o quasi omogenei; piu Series accostate formano un DataFrame.</p>
+        <p>Nel materiale compare piu volte il concetto di indice, esplicito o implicito, e l'analogia con una colonna di database.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/python-pandas-memory-model.png" alt="Schema del modello oggetti con stack, heap, stringhe, funzioni e colonne DataFrame/Series.">
+          <figcaption><strong>Figura M2.4.</strong> Una mappa mentale unica collega il modello Python agli oggetti Pandas, alle Series e ai DataFrame.</figcaption>
+        </figure>
+        <h3>2.2 Dtype, omogeneita e mutabilita</h3>
+        <p>Le Series cercano un dtype coerente; se i valori sono eterogenei, il tipo diventa <code>object</code>. Il comportamento e diverso dagli ndarray di NumPy e diventa rilevante quando si ragiona su aggiornamenti, replacement e creazione di nuove colonne.</p>
+        <p>Nei materiali si insiste sul fatto che l'indice e la chiave di lettura della Series, e che le operazioni su dataframe e series spesso lavorano per etichetta, non per posizione grezza.</p>
+      </section>
+
+      <section class="panel">
+        <h2>3. Indexing e filtering</h2>
+        <h3>3.1 Selezione per colonna, riga e posizione</h3>
+        <p>Gli appunti presentano chiaramente le varianti principali: <code>df[col]</code>, <code>df.loc[label]</code>, <code>df.iloc[pos]</code>, slicing delle righe e filtri booleani.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/pandas-indexing-table.png" alt="Tabella di riferimento per la selezione in Pandas con colonna, label, posizione, slice e vettore booleano.">
+          <figcaption><strong>Figura M2.5.</strong> Promemoria sintetico delle forme di indexing in Pandas e del tipo di risultato ottenuto.</figcaption>
+        </figure>
+        <h3>3.2 Filtri condizionali</h3>
+        <p>La forma piu usata negli esempi e il filtraggio booleano: una condizione costruisce un vettore di True/False che viene poi applicato al DataFrame.</p>
+        <pre class="code-sample"><code>df[(df["one"] &gt; 1) &amp; (df["two"] &lt; 3)]</code></pre>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/pandas-conditional-filtering.png" alt="Notebook con esempi di filtraggio condizionale di un DataFrame e selezione di colonne.">
+          <figcaption><strong>Figura M2.6.</strong> Filtri condizionali su DataFrame, con esempi di selezione di righe e colonne in stile SQL.</figcaption>
+        </figure>
+      </section>
+
+      <section class="panel">
+        <h2>4. Operazioni principali</h2>
+        <h3>4.1 Ordinamento, descrizione e grouping</h3>
+        <p>Il materiale delle erogazioni include esercizi su filtraggio, sorting, grouping e visualizzazione. La lettura consigliata e quella di un workflow: carico i dati, li pulisco, seleziono le colonne utili, aggrego e poi visualizzo.</p>
+        <h3>4.2 Time series e mutabilita</h3>
+        <p>Tra i temi citati ci sono anche il tempo in Python, le serie temporali in Pandas e la differenza tra aggiungere una colonna trasformata e sostituire una colonna esistente.</p>
+        <h3>4.3 Uno sguardo all'ecosistema</h3>
+        <p>Gli appunti richiamano sia librerie come Plotly sia ambienti di lavoro come Jupyter, oltre a collegamenti pratici con SQL, Oracle e data warehouse quando si lavora con dati reali.</p>
+      </section>
+
+      <section class="panel">
+        <h2>5. I/O, BigQuery e fonti esterne</h2>
+        <h3>5.1 Lettura e scrittura</h3>
+        <p>Pandas viene presentato come libreria con molti lettori: <code>read_csv</code>, <code>read_json</code>, <code>read_xml</code>, <code>read_excel</code>, <code>read_sql_query</code>, <code>read_hdfs</code> e altri. Il punto non e memorizzare ogni funzione, ma capire che il DataFrame puo essere un punto di arrivo naturale per sorgenti eterogenee.</p>
+        <h3>5.2 BigQuery</h3>
+        <p>Negli appunti compare l'integrazione con BigQuery tramite la documentazione Pandas I/O e <code>pandas-gbq</code>, utile quando i dati stanno in un warehouse esterno e non localmente.</p>
+        <h3>5.3 Dati da database, Excel e file di scambio</h3>
+        <p>Le note citano anche database, fogli Excel e formati di interscambio come parte del lavoro quotidiano con Pandas.</p>
+      </section>
+
+      <section class="panel">
+        <h2>6. Visualizzazione e tecniche avanzate</h2>
+        <h3>6.1 Visualizzazione con Pandas</h3>
+        <p>Gli appunti citano la documentazione sulle visualizzazioni di Pandas e un tutorial Plotly per passare da analisi tabellare a grafici piu ricchi e interattivi.</p>
+        <h3>6.2 Tecniche avanzate</h3>
+        <p>Vengono richiamati anche argomenti come pulizia, summarization, manipolazione avanzata e l'uso di Dask quando la strategia in memoria non basta piu.</p>
+        <p>In questa parte la regola pratica e semplice: mantenere il dataset il piu possibile leggibile, ridurre il rumore e scegliere la libreria giusta per il tipo di analisi.</p>
+      </section>
+
+      <section class="panel">
+        <h2>7. Materiali ed esercizi</h2>
+        <p>Qui raccolgo i notebook e i riferimenti emersi nelle due erogazioni, raggruppati per tema.</p>
+        <ul>
+          <li><a href="https://colab.research.google.com/github/thimotyb/AnatomyOfMatplotlib/blob/master/AnatomyOfMatplotlib-Part0-Intro2NumPy.ipynb" target="_blank" rel="noopener noreferrer">Introduzione a NumPy</a></li>
+          <li><a href="https://numpy.org/doc/stable/user/basics.creation.html" target="_blank" rel="noopener noreferrer">NumPy creation basics</a></li>
+          <li><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.float64" target="_blank" rel="noopener noreferrer">NumPy float64</a></li>
+          <li><a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/index.html" target="_blank" rel="noopener noreferrer">Pandas getting started</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/real-world-machine-learning/blob/python3/pandas-dataframe.ipynb" target="_blank" rel="noopener noreferrer">Introduzione ai DataFrame</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/pandas_exercises/blob/master/01_Getting_%26_Knowing_Your_Data/Chipotle/Exercise_with_Solutions.ipynb" target="_blank" rel="noopener noreferrer">Pandas data exploration</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/pandas_exercises/blob/master/01_Getting_%26_Knowing_Your_Data/Occupation/Exercises.ipynb" target="_blank" rel="noopener noreferrer">Esercizio autonomo sul caricamento</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/pandas_exercises/blob/master/02_Filtering_%26_Sorting/Chipotle/Exercises_with_solutions.ipynb" target="_blank" rel="noopener noreferrer">Filtering and sorting</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/pandas_exercises/blob/master/03_Grouping/Alcohol_Consumption/Exercise_with_solutions.ipynb" target="_blank" rel="noopener noreferrer">Grouping</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/pandas_exercises/blob/master/03_Grouping/Occupation/Exercise.ipynb" target="_blank" rel="noopener noreferrer">Grouping exercise</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/pandas_exercises/blob/master/07_Visualization/Chipotle/Exercise_with_Solutions.ipynb" target="_blank" rel="noopener noreferrer">Visualisation</a></li>
+          <li><a href="https://pandas.pydata.org/docs/user_guide/visualization.html" target="_blank" rel="noopener noreferrer">Pandas visualization guide</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/real-world-machine-learning/blob/python3/pandas_advanced_techniques.ipynb" target="_blank" rel="noopener noreferrer">Some data manipulation advanced techniques</a></li>
+          <li><a href="https://colab.research.google.com/github/thimotyb/real-world-machine-learning/blob/python3/Importing_data_with_pandas.ipynb" target="_blank" rel="noopener noreferrer">Importing data with pandas</a></li>
+          <li><a href="https://dash.plotly.com/tutorial" target="_blank" rel="noopener noreferrer">Plotly tutorial</a></li>
+          <li><a href="https://pandas.pydata.org/docs/user_guide/io.html" target="_blank" rel="noopener noreferrer">Pandas I/O guide</a></li>
+          <li><a href="https://pandas.pydata.org/docs/user_guide/io.html#io-bigquery" target="_blank" rel="noopener noreferrer">Pandas BigQuery I/O</a></li>
+          <li><a href="https://pandas-gbq.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer">pandas-gbq</a></li>
+          <li><a href="https://www.dask.org/" target="_blank" rel="noopener noreferrer">Dask</a></li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Laboratorio guidato</h2>
+        <h3>Esercizio</h3>
+        <p>Caricare un dataset in Pandas, filtrarlo con una condizione, raggrupparlo per una colonna categorica, produrre una tabella riassuntiva e salvare o visualizzare il risultato.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Riepilogo</h2>
+        <ul>
+          <li>NumPy offre array omogenei e operazioni vettoriali efficienti.</li>
+          <li>Pandas aggiunge indice, Series, DataFrame e un ecosistema di lettura, trasformazione e analisi dati.</li>
+          <li>Indexing, filtering, I/O e visualizzazione sono le quattro operazioni piu importanti da memorizzare all'inizio.</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

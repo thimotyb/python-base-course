@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M3 - API, JSON e integrazione con Python</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script defer src="../assets/js/site.js"></script>
+</head>
+<body id="top" data-page-lang="it">
+  <div id="google_translate_element" class="translate-host" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="shell">
+      <section class="hero">
+        <p><a href="../index.html">Home</a></p>
+        <h1>M3 - API, JSON e integrazione con Python</h1>
+        <p class="hero-copy">Modulo teorico e pratico per chiamare servizi esterni, leggere response HTTP e gestire dati JSON.</p>
+      </section>
+    </div>
+  </header>
+
+  <main class="shell module-layout">
+    <aside class="panel outline-panel" aria-label="Indice modulo">
+      <h2 class="outline-title">Indice</h2>
+      <nav id="outline-nav"></nav>
+    </aside>
+
+    <article class="module-main">
+      <section class="panel">
+        <nav class="module-nav" aria-label="Navigazione modulo">
+          <a href="chapter-02.html">M2 Precedente</a>
+          <span>M3</span>
+        </nav>
+      </section>
+
+      <section class="panel info-grid">
+        <div>
+          <h2>Obiettivi di apprendimento</h2>
+          <ul>
+            <li>Spiegare cosa sono API e API REST.</li>
+            <li>Riconoscere endpoint, risorse, request e response.</li>
+            <li>Usare i metodi HTTP principali.</li>
+            <li>Effettuare una request `GET` con `requests`.</li>
+            <li>Trasformare JSON in dizionari e liste Python.</li>
+          </ul>
+        </div>
+        <div>
+          <h2>Output atteso</h2>
+          <p>Uno script che chiama un endpoint HTTP, verifica eventuali errori, legge la response JSON e ne estrae dati strutturati.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>1. Concetti teorici</h2>
+        <h3>1.1 Cos'e un'API</h3>
+        <p>Un'API e un'interfaccia che permette a sistemi software diversi di comunicare. Definisce quali operazioni sono disponibili, quali dati inviare e quale risposta aspettarsi.</p>
+        <h3>1.2 API come interfaccia tra sistemi</h3>
+        <p>Un'applicazione puo usare un'API per ottenere dati, inviare ordini, aggiornare informazioni o integrare servizi senza conoscere i dettagli interni del sistema chiamato.</p>
+        <h3>1.3 Perche si usano</h3>
+        <p>Le API separano responsabilita, favoriscono integrazione tra servizi e permettono di riusare funzionalita gia disponibili.</p>
+      </section>
+
+      <section class="panel">
+        <h2>2. Introduzione alle API REST</h2>
+        <h3>2.1 Architettura REST</h3>
+        <p>REST e uno stile architetturale per progettare servizi accessibili via HTTP. Le risorse sono identificate da URL e le operazioni sono espresse tramite metodi HTTP.</p>
+        <h3>2.2 Concetti chiave</h3>
+        <ul>
+          <li><strong>Endpoint:</strong> URL che espone una funzionalita o una risorsa.</li>
+          <li><strong>Risorsa:</strong> entita gestita dal servizio, come utenti, ordini o prodotti.</li>
+          <li><strong>Request:</strong> richiesta inviata dal client al server.</li>
+          <li><strong>Response:</strong> risposta del server, con stato, header e corpo.</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>3. Metodi HTTP</h2>
+        <h3>3.1 GET</h3>
+        <p>`GET` richiede dati senza modificare la risorsa sul server.</p>
+        <h3>3.2 POST</h3>
+        <p>`POST` invia dati per creare una nuova risorsa o avviare un'elaborazione.</p>
+        <h3>3.3 PUT</h3>
+        <p>`PUT` aggiorna o sostituisce una risorsa esistente secondo le regole dell'API.</p>
+        <h3>3.4 DELETE</h3>
+        <p>`DELETE` richiede la rimozione di una risorsa.</p>
+      </section>
+
+      <section class="panel">
+        <h2>4. Formato JSON</h2>
+        <h3>4.1 Struttura</h3>
+        <p>JSON rappresenta dati tramite oggetti, array, stringhe, numeri, booleani e valori nulli. E leggibile da umani e facilmente interpretabile dai programmi.</p>
+        <h3>4.2 JSON e dizionari Python</h3>
+        <p>Un oggetto JSON assomiglia a un dizionario Python, ma JSON e un formato testuale. Dopo il parsing, Python lo rappresenta con dizionari, liste e tipi nativi.</p>
+      </section>
+
+      <section class="panel">
+        <h2>5. API e JSON con Python</h2>
+        <h3>5.1 Libreria requests</h3>
+        <p>`requests` semplifica l'invio di richieste HTTP da Python e rende piu leggibile il codice rispetto all'uso diretto di librerie a basso livello.</p>
+        <h3>5.2 Request GET e lettura della response</h3>
+        <pre class="code-sample"><code>import requests
+
+url = "https://api.example.com/items"
+response = requests.get(url, timeout=10)
+print(response.status_code)
+print(response.text)</code></pre>
+        <p>La response contiene il codice di stato, gli header e il corpo. Il codice di stato indica se la richiesta e riuscita o se si e verificato un errore.</p>
+      </section>
+
+      <section class="panel">
+        <h2>6. Gestione del JSON</h2>
+        <h3>6.1 Parsing JSON</h3>
+        <p>Quando la response contiene JSON, `response.json()` converte il testo in strutture Python, tipicamente dizionari e liste.</p>
+        <pre class="code-sample"><code>dati = response.json()
+for item in dati["items"]:
+    print(item["name"])</code></pre>
+        <h3>6.2 Accesso ai dati</h3>
+        <p>L'accesso ai dati richiede di conoscere la forma della risposta: chiavi disponibili, liste annidate e possibili valori mancanti.</p>
+      </section>
+
+      <section class="panel">
+        <h2>7. Errori, autenticazione e sicurezza</h2>
+        <h3>7.1 Gestione errori nelle chiamate API</h3>
+        <p>Uno script robusto controlla timeout, errori di rete, codici di stato inattesi e JSON non valido.</p>
+        <h3>7.2 Autenticazione API</h3>
+        <p>Molte API richiedono credenziali, token o chiavi. Le credenziali non devono essere scritte direttamente nel codice sorgente condiviso.</p>
+        <h3>7.3 Buone pratiche, limiti e sicurezza</h3>
+        <ul>
+          <li>Impostare timeout espliciti.</li>
+          <li>Gestire rate limit e risposte di errore.</li>
+          <li>Validare i dati ricevuti prima di usarli.</li>
+          <li>Proteggere token e chiavi di accesso.</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Laboratorio guidato</h2>
+        <h3>Esercizio</h3>
+        <p>Chiamare un endpoint pubblico di test, leggere la response JSON, estrarre alcuni campi e salvare un report testuale con i risultati principali.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Esercizi dal materiale</h2>
+        <p>I due notebook seguenti allineano il modulo 3 con gli appunti delle erogazioni: uno collega l'ingestion di dati a Pandas, l'altro porta direttamente all'uso di una REST request in Python.</p>
+        <ul>
+          <li>
+            <a href="https://github.com/thimotyb/real-world-machine-learning/blob/python3/Importing_data_with_pandas.ipynb" target="_blank" rel="noopener noreferrer">
+              Importing data with pandas
+            </a>
+            <br>
+            Esercizio utile per passare da file e sorgenti esterne a un DataFrame, con un ponte naturale verso il caricamento dei dati usati poi dalle API.
+          </li>
+          <li>
+            <a href="https://github.com/thimotyb/real-world-machine-learning/blob/python3/REST_request_example.ipynb" target="_blank" rel="noopener noreferrer">
+              REST request example
+            </a>
+            <br>
+            Esercizio diretto su una chiamata REST, utile per vedere request, response e parsing JSON in un notebook compatto.
+          </li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>FastAPI tutorial</h2>
+        <p>FastAPI entra come passo naturale dopo le basi REST: si parte dall'installazione, si definiscono le prime rotte e si aggiungono poi validazione, dipendenze e gestione degli errori.</p>
+        <ul>
+          <li>Install FastAPI.</li>
+          <li>First Steps.</li>
+          <li>Path Parameters e Query Parameters.</li>
+          <li>Request Body e JSON Compatible Encoder.</li>
+          <li>Handling Errors e Response Model.</li>
+          <li>Dependencies e Security.</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Riepilogo</h2>
+        <ul>
+          <li>Le API REST espongono risorse tramite endpoint e metodi HTTP.</li>
+          <li>JSON e il formato piu comune per scambiare dati strutturati.</li>
+          <li>Python puo chiamare API, convertire JSON e gestire errori con codice chiaro e controllato.</li>
+        </ul>
+      </section>
+
+      <section class="panel">
+        <h2>Sitografia</h2>
+        <ul>
+          <li>
+            <a href="https://fastapi.tiangolo.com/tutorial/" target="_blank" rel="noopener noreferrer">
+              FastAPI Tutorial - User Guide
+            </a>
+            <br>
+            Percorso ufficiale per installazione, prime route, parametri, body, errori, response model, dipendenze e sicurezza.
+          </li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
