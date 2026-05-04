@@ -10,8 +10,8 @@
 
 | Module | Title | Output Artifact | Source Files | Notes |
 | --- | --- | --- | --- | --- |
-| M1 | Fondamenti di Python | `site/chapters/chapter-01.html` | `CONTENTS.md`, `resources/appunti_erogazioni.docx` | Introduzione, ambiente, oggetti, container, stringhe, funzioni, moduli ed eccezioni |
-| M2 | Strutture dati, logica e file | `site/chapters/chapter-02.html` | `CONTENTS.md`, `resources/appunti_erogazioni.docx` | NumPy, Pandas, indexing, filtering, grouping, I/O, BigQuery e visualizzazione |
+| M1 | Fondamenti di Python | `site/chapters/chapter-01.html` | `CONTENTS.md`, `resources/materiale_erogazioni.docx` | Introduzione, ambiente, oggetti, container, stringhe, funzioni, moduli ed eccezioni |
+| M2 | Strutture dati, logica e file | `site/chapters/chapter-02.html` | `CONTENTS.md`, `resources/materiale_erogazioni.docx` | NumPy, Pandas, indexing, filtering, grouping, I/O, BigQuery e visualizzazione |
 | M3 | API, JSON e integrazione con Python | `site/chapters/chapter-03.html` | `CONTENTS.md` | API REST, metodi HTTP, JSON, requests, parsing, errori, autenticazione, sicurezza, FastAPI e notebook di supporto |
 
 ## Source Inventory
@@ -19,7 +19,7 @@
 | Source File | Type | Used In Modules | Notes |
 | --- | --- | --- | --- |
 | `CONTENTS.md` | course outline | `M1, M2, M3` | Canonical outline for the course |
-| `resources/appunti_erogazioni.docx` | source notes | `M1, M2` | Appunti delle due erogazioni, con figure e link da integrare |
+| `resources/materiale_erogazioni.docx` | source material | `M1, M2` | Materiale di riferimento con figure e link da integrare |
 | `../agents-course/site/` | reference website | site layout and shared behavior | Structural and visual reference only |
 
 ## Mapping Rules

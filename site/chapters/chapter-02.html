@@ -59,8 +59,8 @@
       <section class="panel">
         <h2>1. Numeri, costi e NumPy</h2>
         <h3>1.1 Perche introdurre NumPy</h3>
-        <p>Nei materiali delle erogazioni NumPy entra subito dopo i fondamentali Python per mostrare come trattare array omogenei, tipi numerici controllati e operazioni vettoriali piu efficienti dei cicli manuali.</p>
-        <p>La terminologia ricorrente e quella di ndarray, shape, dimensione, array 1D/2D/3D e dtype, con particolare attenzione a <code>numpy.float64</code> e ai tipi numerici piu adatti al calcolo scientifico.</p>
+        <p>Nei materiali delle erogazioni NumPy entra subito dopo i fondamentali Python per mostrare come trattare array omogenei, tipi numerici controllati e operazioni vettoriali più efficienti dei cicli manuali.</p>
+        <p>La terminologia ricorrente è quella di ndarray, shape, dimensione, array 1D/2D/3D e dtype, con particolare attenzione a <code>numpy.float64</code> e ai tipi numerici più adatti al calcolo scientifico.</p>
         <figure class="module-figure" data-zoomable>
           <img src="../assets/images/python-big-o.png" alt="Curva di complessita con confronto tra O(1), O(log n), O(n), O(n log n), O(n^2) e O(2^n).">
           <figcaption><strong>Figura M2.1.</strong> La crescita della complessita aiuta a capire quando una soluzione resta pratica e quando invece diventa costosa.</figcaption>
@@ -70,19 +70,19 @@
           <figcaption><strong>Figura M2.2.</strong> Una seconda vista della complessita, utile per discutere di limiti, performance e scelte di implementazione.</figcaption>
         </figure>
         <h3>1.2 Creazione di array e broadcasting</h3>
-        <p>Gli appunti mostrano la creazione di array da liste, da intervalli, da generatori casuali e l'uso del broadcasting, descritto come una forma di espansione logica dei dati per applicare operazioni vettoriali a dimensionalita diverse.</p>
+        <p>Il materiale mostra la creazione di array da liste, da intervalli, da generatori casuali e l'uso del broadcasting, descritto come una forma di espansione logica dei dati per applicare operazioni vettoriali a dimensionalità diverse.</p>
         <figure class="module-figure" data-zoomable>
           <img src="../assets/images/python-abstract-containers.png" alt="Rappresentazione astratta di range numerici e collezioni di valori con focus sui tipi numerici e sulle sequenze.">
           <figcaption><strong>Figura M2.3.</strong> Rappresentazione astratta di intervalli e collezioni numeriche, utile per introdurre array e dati omogenei.</figcaption>
         </figure>
-        <p>Quando i dati non stanno comodamente in memoria, gli appunti citano Dask, Hadoop e Spark come alternative per il calcolo distribuito.</p>
+        <p>Quando i dati non stanno comodamente in memoria, il materiale cita Dask, Hadoop e Spark come alternative per il calcolo distribuito.</p>
       </section>
 
       <section class="panel">
         <h2>2. Modello dati di Pandas</h2>
         <h3>2.1 Serie e DataFrame</h3>
-        <p>Pandas e presentato come libreria per data analysis, con un modello centrato su Series e DataFrame. Una Series e una sequenza indicizzata di valori omogenei o quasi omogenei; piu Series accostate formano un DataFrame.</p>
-        <p>Nel materiale compare piu volte il concetto di indice, esplicito o implicito, e l'analogia con una colonna di database.</p>
+        <p>Pandas è presentato come libreria per data analysis, con un modello centrato su Series e DataFrame. Una Series è una sequenza indicizzata di valori omogenei o quasi omogenei; più Series accostate formano un DataFrame.</p>
+        <p>Nel materiale compare più volte il concetto di indice, esplicito o implicito, e l'analogia con una colonna di database.</p>
         <figure class="module-figure" data-zoomable>
           <img src="../assets/images/python-pandas-memory-model.png" alt="Schema del modello oggetti con stack, heap, stringhe, funzioni e colonne DataFrame/Series.">
           <figcaption><strong>Figura M2.4.</strong> Una mappa mentale unica collega il modello Python agli oggetti Pandas, alle Series e ai DataFrame.</figcaption>
@@ -95,13 +95,13 @@
       <section class="panel">
         <h2>3. Indexing e filtering</h2>
         <h3>3.1 Selezione per colonna, riga e posizione</h3>
-        <p>Gli appunti presentano chiaramente le varianti principali: <code>df[col]</code>, <code>df.loc[label]</code>, <code>df.iloc[pos]</code>, slicing delle righe e filtri booleani.</p>
+        <p>Il materiale presenta chiaramente le varianti principali: <code>df[col]</code>, <code>df.loc[label]</code>, <code>df.iloc[pos]</code>, slicing delle righe e filtri booleani.</p>
         <figure class="module-figure" data-zoomable>
           <img src="../assets/images/pandas-indexing-table.png" alt="Tabella di riferimento per la selezione in Pandas con colonna, label, posizione, slice e vettore booleano.">
           <figcaption><strong>Figura M2.5.</strong> Promemoria sintetico delle forme di indexing in Pandas e del tipo di risultato ottenuto.</figcaption>
         </figure>
         <h3>3.2 Filtri condizionali</h3>
-        <p>La forma piu usata negli esempi e il filtraggio booleano: una condizione costruisce un vettore di True/False che viene poi applicato al DataFrame.</p>
+        <p>La forma più usata negli esempi è il filtraggio booleano: una condizione costruisce un vettore di True/False che viene poi applicato al DataFrame.</p>
         <pre class="code-sample"><code>df[(df["one"] &gt; 1) &amp; (df["two"] &lt; 3)]</code></pre>
         <figure class="module-figure" data-zoomable>
           <img src="../assets/images/pandas-conditional-filtering.png" alt="Notebook con esempi di filtraggio condizionale di un DataFrame e selezione di colonne.">
@@ -116,26 +116,26 @@
         <h3>4.2 Time series e mutabilita</h3>
         <p>Tra i temi citati ci sono anche il tempo in Python, le serie temporali in Pandas e la differenza tra aggiungere una colonna trasformata e sostituire una colonna esistente.</p>
         <h3>4.3 Uno sguardo all'ecosistema</h3>
-        <p>Gli appunti richiamano sia librerie come Plotly sia ambienti di lavoro come Jupyter, oltre a collegamenti pratici con SQL, Oracle e data warehouse quando si lavora con dati reali.</p>
+        <p>Il materiale richiama sia librerie come Plotly sia ambienti di lavoro come Jupyter, oltre a collegamenti pratici con SQL, Oracle e data warehouse quando si lavora con dati reali.</p>
       </section>
 
       <section class="panel">
         <h2>5. I/O, BigQuery e fonti esterne</h2>
         <h3>5.1 Lettura e scrittura</h3>
-        <p>Pandas viene presentato come libreria con molti lettori: <code>read_csv</code>, <code>read_json</code>, <code>read_xml</code>, <code>read_excel</code>, <code>read_sql_query</code>, <code>read_hdfs</code> e altri. Il punto non e memorizzare ogni funzione, ma capire che il DataFrame puo essere un punto di arrivo naturale per sorgenti eterogenee.</p>
+        <p>Pandas viene presentato come libreria con molti lettori: <code>read_csv</code>, <code>read_json</code>, <code>read_xml</code>, <code>read_excel</code>, <code>read_sql_query</code>, <code>read_hdfs</code> e altri. Il punto non è memorizzare ogni funzione, ma capire che il DataFrame può essere un punto di arrivo naturale per sorgenti eterogenee.</p>
         <h3>5.2 BigQuery</h3>
-        <p>Negli appunti compare l'integrazione con BigQuery tramite la documentazione Pandas I/O e <code>pandas-gbq</code>, utile quando i dati stanno in un warehouse esterno e non localmente.</p>
+        <p>Nel materiale compare l'integrazione con BigQuery tramite la documentazione Pandas I/O e <code>pandas-gbq</code>, utile quando i dati stanno in un warehouse esterno e non localmente.</p>
         <h3>5.3 Dati da database, Excel e file di scambio</h3>
-        <p>Le note citano anche database, fogli Excel e formati di interscambio come parte del lavoro quotidiano con Pandas.</p>
+        <p>Il materiale cita anche database, fogli Excel e formati di interscambio come parte del lavoro quotidiano con Pandas.</p>
       </section>
 
       <section class="panel">
         <h2>6. Visualizzazione e tecniche avanzate</h2>
         <h3>6.1 Visualizzazione con Pandas</h3>
-        <p>Gli appunti citano la documentazione sulle visualizzazioni di Pandas e un tutorial Plotly per passare da analisi tabellare a grafici piu ricchi e interattivi.</p>
+        <p>Il materiale cita la documentazione sulle visualizzazioni di Pandas e un tutorial Plotly per passare da analisi tabellare a grafici più ricchi e interattivi.</p>
         <h3>6.2 Tecniche avanzate</h3>
-        <p>Vengono richiamati anche argomenti come pulizia, summarization, manipolazione avanzata e l'uso di Dask quando la strategia in memoria non basta piu.</p>
-        <p>In questa parte la regola pratica e semplice: mantenere il dataset il piu possibile leggibile, ridurre il rumore e scegliere la libreria giusta per il tipo di analisi.</p>
+        <p>Vengono richiamati anche argomenti come pulizia, summarization, manipolazione avanzata e l'uso di Dask quando la strategia in memoria non basta più.</p>
+        <p>In questa parte la regola pratica è semplice: mantenere il dataset il più possibile leggibile, ridurre il rumore e scegliere la libreria giusta per il tipo di analisi.</p>
       </section>
 
       <section class="panel">
@@ -175,7 +175,7 @@
         <ul>
           <li>NumPy offre array omogenei e operazioni vettoriali efficienti.</li>
           <li>Pandas aggiunge indice, Series, DataFrame e un ecosistema di lettura, trasformazione e analisi dati.</li>
-          <li>Indexing, filtering, I/O e visualizzazione sono le quattro operazioni piu importanti da memorizzare all'inizio.</li>
+          <li>Indexing, filtering, I/O e visualizzazione sono le quattro operazioni più importanti da memorizzare all'inizio.</li>
         </ul>
       </section>
     </article>

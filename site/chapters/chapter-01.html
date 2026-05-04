@@ -42,7 +42,7 @@
         <div>
           <h2>Obiettivi di apprendimento</h2>
           <ul>
-            <li>Capire perche Python e usato in scenari reali.</li>
+            <li>Capire perché Python è usato in scenari reali.</li>
             <li>Installare Python, aprire un notebook e lanciare uno script.</li>
             <li>Usare `print()`, `input()`, `help()`, `dir()`, `type()`, `callable()` e `repr()`.</li>
             <li>Scrivere codice con indentazione, variabili, commenti e operatori.</li>
@@ -84,7 +84,7 @@
       <section class="panel">
         <h2>2. Tipi base e oggetti</h2>
         <h3>2.1 Oggetti, stack, heap e garbage collection</h3>
-        <p>Le erogazioni insistono sul fatto che in Python tutto e un oggetto: anche le funzioni. Le variabili sono riferimenti, non scatole rigide di memoria, e la raccolta dei rifiuti libera gli oggetti non piu raggiungibili.</p>
+        <p>Le erogazioni insistono sul fatto che in Python tutto è un oggetto: anche le funzioni. Le variabili sono riferimenti, non scatole rigide di memoria, e la raccolta dei rifiuti libera gli oggetti non più raggiungibili.</p>
         <p>Questo schema aiuta a leggere con naturalezza concetti come mutabilita, identita e condivisione dei riferimenti.</p>
         <figure class="module-figure" data-zoomable>
           <img src="../assets/images/python-pandas-memory-model.png" alt="Schema esteso del modello oggetti Python con stack, heap, stringhe, tuple, funzioni e riferimenti.">
@@ -92,7 +92,7 @@
         </figure>
         <h3>2.2 Tipi base e built-in function</h3>
         <p>Tra le funzioni di base ricorrenti ci sono `type()`, `callable()`, `repr()`, i costruttori dei tipi e gli oggetti della libreria standard. Nel corso si usa spesso `help()` e `dir()` per esplorare i tipi standard e i loro metodi.</p>
-        <p>Le note raccolte citano in particolare la documentazione sui tipi built-in e la libreria standard come riferimento principale per l'esplorazione autonoma.</p>
+        <p>La documentazione cita in particolare i tipi built-in e la libreria standard come riferimento principale per l'esplorazione autonoma.</p>
       </section>
 
       <section class="panel">
@@ -100,7 +100,7 @@
         <h3>3.1 Ordinati e non ordinati</h3>
         <p>Il corso distingue tra sequenze ordinate e contenitori non ordinati. Le stringhe, le liste e le tuple sono sequenze; set e dizionari hanno comportamenti diversi e sono fondamentali per deduplicare, cercare e associare dati.</p>
         <h3>3.2 Mutabili e immutabili</h3>
-        <p>Le stringhe e le tuple non si modificano in place; liste, set e dizionari invece si possono aggiornare. Questo punto torna piu volte negli appunti, anche quando si ragiona su riferimenti e copie.</p>
+        <p>Le stringhe e le tuple non si modificano in place; liste, set e dizionari invece si possono aggiornare. Questo punto torna più volte, anche quando si ragiona su riferimenti e copie.</p>
         <figure class="module-figure" data-zoomable>
           <img src="../assets/images/python-set-intersection.png" alt="Esempio di intersezione tra insiemi e confronto con il doppio ciclo sui contenitori.">
           <figcaption><strong>Figura M1.3.</strong> Gli insiemi permettono operazioni come l'intersezione senza ricorrere a doppi cicli manuali.</figcaption>
@@ -110,7 +110,7 @@
           <figcaption><strong>Figura M1.4.</strong> Rappresentazione schematica delle posizioni nei contenitori e dell'accesso per indice.</figcaption>
         </figure>
         <h3>3.3 Stringhe</h3>
-        <p>Le stringhe supportano Unicode e offrono metodi ricorrenti per pulizia, ricerca, trasformazione e formattazione. Gli appunti richiamano in modo esplicito la documentazione su `str` e sul mini-linguaggio di formattazione.</p>
+        <p>Le stringhe supportano Unicode e offrono metodi ricorrenti per pulizia, ricerca, trasformazione e formattazione. Il materiale richiama in modo esplicito la documentazione su `str` e sul mini-linguaggio di formattazione.</p>
         <p>Nel materiale emerge anche il pattern del formatting moderno con `format()` e delle sequenze di escape per costruire output leggibili.</p>
       </section>
 
@@ -124,7 +124,7 @@
           <figcaption><strong>Figura M1.5.</strong> Le lambda sono usate come funzioni anonime, per esempio nelle chiavi di ordinamento.</figcaption>
         </figure>
         <h3>4.2 Cicli, accumulo e comprehension</h3>
-        <p>I pattern piu ripetuti negli appunti sono il ciclo ad accumulo, il loop su range, la scansione di una lista con indice e le comprehension per creare nuove collezioni in modo compatto.</p>
+        <p>I pattern più ripetuti sono il ciclo ad accumulo, il loop su range, la scansione di una lista con indice e le comprehension per creare nuove collezioni in modo compatto.</p>
         <h3>4.3 Esempio di stile idiomatico</h3>
         <pre class="code-sample"><code>pairs = [(3, "three"), (2, "two"), (1, "one")]
 pairs.sort(key=lambda item: item[1])</code></pre>
@@ -133,12 +133,12 @@ pairs.sort(key=lambda item: item[1])</code></pre>
       <section class="panel">
         <h2>5. Moduli, eccezioni e librerie</h2>
         <h3>5.1 Moduli</h3>
-        <p>I moduli sono il modo naturale per esternalizzare funzioni riutilizzabili. Negli appunti compaiono esempi con file locali come <code>fibo.py</code>, oltre all'uso della standard library tramite alias come <code>import statistics as stat</code>.</p>
+        <p>I moduli sono il modo naturale per esternalizzare funzioni riutilizzabili. Nel percorso compaiono esempi con file locali come <code>fibo.py</code>, oltre all'uso della standard library tramite alias come <code>import statistics as stat</code>.</p>
         <h3>5.2 Librerie esterne</h3>
-        <p>Le librerie come NumPy e Pandas si installano con il package manager e si verificano con <code>pip list</code>. Nei materiali delle erogazioni questo punto e esplicitato per chiarire la differenza tra libreria standard e pacchetti da installare.</p>
+        <p>Le librerie come NumPy e Pandas si installano con il package manager e si verificano con <code>pip list</code>. Nei materiali delle erogazioni questo punto è esplicitato per chiarire la differenza tra libreria standard e pacchetti da installare.</p>
         <h3>5.3 Eccezioni</h3>
         <p>Il blocco <code>try</code> / <code>except</code> serve a gestire errori attesi senza interrompere subito il programma. E un tema ricorrente in lettura file, conversioni di tipo e interazione con risorse esterne.</p>
-        <p>Gli appunti citano anche la gestione delle connessioni e degli input non affidabili come casi d'uso naturali.</p>
+        <p>Il materiale cita anche la gestione delle connessioni e degli input non affidabili come casi d'uso naturali.</p>
       </section>
 
       <section class="panel">
@@ -165,7 +165,7 @@ pairs.sort(key=lambda item: item[1])</code></pre>
       <section class="panel">
         <h2>Laboratorio guidato</h2>
         <h3>Esercizio</h3>
-        <p>Creare uno script che chiede nome, anno di nascita e citta, calcola un'eta indicativa, formatta il risultato e mostra come la funzione cambia comportamento con argomenti diversi.</p>
+        <p>Creare uno script che chiede nome, anno di nascita e città, calcola un'età indicativa, formatta il risultato e mostra come la funzione cambia comportamento con argomenti diversi.</p>
       </section>
 
       <section class="panel">
