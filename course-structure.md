@@ -12,7 +12,7 @@
 | --- | --- | --- | --- | --- |
 | M1 | Fondamenti di Python | `site/chapters/chapter-01.html` | `CONTENTS.md`, `resources/materiale_erogazioni.docx` | Introduzione, ambiente, oggetti, container, stringhe, funzioni, moduli ed eccezioni |
 | M2 | Strutture dati, logica e file | `site/chapters/chapter-02.html` | `CONTENTS.md`, `resources/materiale_erogazioni.docx` | NumPy, Pandas, indexing, filtering, grouping, I/O, BigQuery e visualizzazione |
-| M3 | API, JSON e integrazione con Python | `site/chapters/chapter-03.html` | `CONTENTS.md` | API REST, metodi HTTP, JSON, requests, parsing, errori, autenticazione, sicurezza, FastAPI e notebook di supporto |
+| M3 | API, JSON e integrazione con Python | `site/chapters/chapter-03.html` | `CONTENTS.md` | API REST, metodi HTTP, JSON, requests, parsing, errori, tipi Python, async, variabili di ambiente, ambienti virtuali, autenticazione, sicurezza, FastAPI e notebook di supporto |
 
 ## Source Inventory
 

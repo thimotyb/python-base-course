@@ -23,7 +23,7 @@ Al termine del corso i partecipanti saranno in grado di:
 
 #### 1.1 Introduzione a Python
 
-- Perche usare Python.
+- Perché usare Python.
 - Casi d'uso reali.
 - Notebook e ambiente di sviluppo.
 - Jupyter, Colab e IDLE.
@@ -137,9 +137,9 @@ Al termine del corso i partecipanti saranno in grado di:
 
 #### 3.1 Concetti teorici sulle API
 
-- Cos'e un'API.
+- Cos'è un'API.
 - API come interfaccia tra sistemi.
-- Perche si usano le API.
+- Perché si usano le API.
 
 #### 3.2 Introduzione alle API REST
 
@@ -159,7 +159,7 @@ Al termine del corso i partecipanti saranno in grado di:
 
 #### 3.4 Formato JSON
 
-- Cos'e il formato JSON.
+- Cos'è il formato JSON.
 - Struttura del formato JSON.
 - Differenze tra JSON e dizionari Python.
 
@@ -179,18 +179,51 @@ Al termine del corso i partecipanti saranno in grado di:
 
 - Gestione degli errori nelle chiamate API.
 
-#### 3.8 Cenni avanzati
+#### 3.8 Tipi Python per FastAPI
+
+- Type hints e annotazioni.
+- Tipi semplici.
+- Tipi generici: liste, tuple, set, dizionari.
+- Union, valori opzionali e `None`.
+- Classi come tipi, Pydantic e annotazioni con metadati.
+- Tipi usati da FastAPI per validazione e documentazione.
+
+#### 3.9 Concorrenza e `async` / `await`
+
+- Codice asincrono.
+- Coroutine.
+- `async` / `await`.
+- Concorrenza e I/O.
+- Uso in FastAPI.
+
+#### 3.10 Variabili di ambiente
+
+- Creare e usare le variabili di ambiente.
+- Lettura delle variabili di ambiente in Python.
+- Tipi e validazione.
+- `PATH`.
+
+#### 3.11 Ambienti virtuali
+
+- Creare un progetto.
+- Creare un ambiente virtuale.
+- Attivare l'ambiente virtuale.
+- Verificare che l'ambiente virtuale sia attivo.
+- `pip`, `.gitignore`, installazione e avvio del programma.
+- Perché servono gli ambienti virtuali.
+
+#### 3.12 Cenni avanzati
 
 - Autenticazione API: concetti base.
 - Buone pratiche.
 - Limiti e sicurezza.
 
-#### 3.9 Notebook di supporto
+#### 3.13 Notebook di supporto
 
 - `Importing_data_with_pandas.ipynb`: caricamento dati con Pandas e DataFrame.
 - `REST_request_example.ipynb`: esempio di request REST, response e parsing JSON.
 
-#### 3.10 FastAPI
+#### 3.14 FastAPI
 
 - Installazione di FastAPI.
 - First Steps.
