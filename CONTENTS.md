@@ -232,6 +232,13 @@ Al termine del corso i partecipanti saranno in grado di:
 - Handling Errors e Response Model.
 - Dependencies e Security.
 
+#### 3.15 Creare client da OAS
+
+- OpenAPI e client generator.
+- Il JSON della specifica da `/openapi.json` esposto da FastAPI.
+- Esempio minimo con `openapi-python-client`.
+- Quando conviene generare un client.
+
 ## Note organizzative
 
 - Lingua del corso: italiano.

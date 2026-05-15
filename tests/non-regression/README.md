@@ -33,6 +33,23 @@ Check one module only:
 python3 scripts/non_regression_guard.py check --id M1
 ```
 
+## Run the Keycloak smoke test
+
+The M3 example also has a Python smoke test that spins up a local fake Keycloak issuer, starts the FastAPI resource server, and verifies the `client_credentials` flow end to end without Docker:
+
+```bash
+cd /home/thimoty/git/python-base
+python3 tests/non-regression/m3_keycloak_smoke.py
+```
+
+This is a fast non-regression guard for the Python implementation of the example. The repository also includes `examples/m3-keycloak-client-credentials/scripts/start-keycloak-local.py` for launching the real Keycloak distribution locally.
+
+You can also run it through the shared guard:
+
+```bash
+python3 scripts/non_regression_guard.py m3-keycloak-smoke
+```
+
 ## Workflow
 
 1. Complete module content.

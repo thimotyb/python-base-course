@@ -192,6 +192,20 @@ for item in dati["items"]:
         <h2>Laboratorio guidato</h2>
         <h3>Esercizio</h3>
         <p>Chiamare un endpoint pubblico di test, leggere la response JSON, estrarre alcuni campi e salvare un report testuale con i risultati principali.</p>
+        <h3>Esempio più completo</h3>
+        <p>Come sostituto attuale del vecchio esempio su usfundamentals, Alpha Vantage funziona bene per mostrare una API un po' più articolata: un endpoint per la scheda aziendale e uno per i dati finanziari. Qui sotto uso `OVERVIEW` per i dati societari e `INCOME_STATEMENT` per gli indicatori.</p>
+        <pre class="code-sample"><code># Using a more complex API
+company_overview_url = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=IBM&apikey=demo'
+company_indicators_url = 'https://www.alphavantage.co/query?function=INCOME_STATEMENT&symbol=IBM&apikey=demo'
+
+import requests
+
+overview = requests.get(company_overview_url).json()
+indicators = requests.get(company_indicators_url).json()
+
+print(overview.get('Name'))
+print(indicators.get('annualReports', [])[0].get('fiscalDateEnding'))</code></pre>
+        <p>Per il laboratorio e per il notebook collegato, questa combinazione resta molto utile: la risposta e JSON, i dati sono annidati e si vedono subito request, parsing e accesso a liste di report.</p>
       </section>
 
       <section class="panel">
@@ -210,14 +224,14 @@ for item in dati["items"]:
               REST request example
             </a>
             <br>
-            Esercizio diretto su una chiamata REST, utile per vedere request, response e parsing JSON in un notebook compatto.
+            Esercizio diretto su una chiamata REST, utile per vedere request, response e parsing JSON in un notebook compatto. Se vuoi un sostituto attuale del vecchio esempio su usfundamentals, usa Alpha Vantage con `OVERVIEW` e `INCOME_STATEMENT`.
           </li>
         </ul>
       </section>
 
       <section class="panel">
         <h2>13. FastAPI tutorial</h2>
-        <p>FastAPI entra come passo naturale dopo le basi REST: si parte dall'installazione, si definiscono le prime rotte e si aggiungono poi validazione, dipendenze e gestione degli errori.</p>
+        <p>FastAPI entra come passo naturale dopo le basi REST: si parte dall'installazione, si definiscono le prime rotte e si aggiungono poi validazione, dipendenze e gestione degli errori. Quando il server è attivo, la specifica OpenAPI è esposta automaticamente all'URL `/openapi.json`, che si può aprire dal browser o scaricare per generare un client.</p>
         <ul>
           <li>Install FastAPI.</li>
           <li>First Steps.</li>
@@ -225,6 +239,61 @@ for item in dati["items"]:
           <li>Request Body e JSON Compatible Encoder.</li>
           <li>Handling Errors e Response Model.</li>
           <li>Dependencies e Security.</li>
+        </ul>
+        <h3>13.1 Esempio completo: Keycloak + JWT</h3>
+        <p>Per un laboratorio separato dal tutorial base puoi usare l'esempio completo in <code>examples/m3-keycloak-client-credentials</code>. Include Keycloak avviato localmente dalla distribuzione ufficiale, un server FastAPI protetto da Bearer JWT, un client Python con flusso <code>client_credentials</code>, un notebook e una collezione Postman.</p>
+        <ul>
+          <li>
+            <a href="../examples/m3-keycloak-client-credentials/README.md" target="_blank" rel="noopener noreferrer">
+              README dell'esempio
+            </a>
+            <br>
+            Panoramica del laboratorio, credenziali di default e istruzioni rapide.
+          </li>
+          <li>
+            <a href="../examples/m3-keycloak-client-credentials/notebook/M3-Keycloak-JWT-Demo.ipynb" target="_blank" rel="noopener noreferrer">
+              Notebook Keycloak JWT
+            </a>
+            <br>
+            Esecuzione step by step dello stesso flusso con celle Python e commenti didattici.
+          </li>
+          <li>
+            <a href="../examples/m3-keycloak-client-credentials/postman/README.md" target="_blank" rel="noopener noreferrer">
+              Playbook Postman
+            </a>
+            <br>
+            Guida operativa per riprodurre il token flow e la chiamata al backend protetto.
+          </li>
+        </ul>
+        <h3>13.2 Flusso OAuth2 e JWT</h3>
+        <p>Il client non chiama direttamente l'API: prima ottiene un access token da Keycloak con <code>client_credentials</code>, poi lo invia nell'header <code>Authorization: Bearer</code>. Il backend FastAPI scarica le chiavi pubbliche del realm, verifica firma e issuer del JWT e accetta solo token emessi per il client atteso.</p>
+      </section>
+
+      <section class="panel">
+        <h2>14. Creare client da OAS</h2>
+        <p>Quando esiste una definizione OpenAPI, un client Python può essere generato automaticamente invece di essere scritto a mano. Nel caso di FastAPI questo è comodo perché il JSON della specifica si prende direttamente dall'URL esposto dal server, senza passaggi intermedi.</p>
+        <h3>14.1 OpenAPI e client generator</h3>
+        <p>Il flusso tipico parte da `http://127.0.0.1:8000/openapi.json` o da un URL equivalente se l'app gira su un host diverso. Uno strumento come <code>openapi-python-client</code> legge quella specifica e crea un pacchetto Python con una classe client, modelli dati e funzioni per ogni endpoint.</p>
+        <h3>14.2 Esempio minimo</h3>
+        <pre class="code-sample"><code># scarico la specifica direttamente dal server FastAPI
+curl http://127.0.0.1:8000/openapi.json -o openapi.json
+
+# genero il client
+openapi-python-client generate --path openapi.json
+
+# uso del client generato
+from my_api_client import Client
+from my_api_client.api.default import list_items
+
+client = Client(base_url="https://api.example.com")
+response = list_items.sync(client=client)
+print(response)</code></pre>
+        <p>Il nome del pacchetto e delle funzioni dipende dallo spec e dai tag dell'API. L'idea importante è che la struttura del client deriva direttamente dalla OAS, con meno codice manuale e meno rischio di disallineamento.</p>
+        <h3>14.3 Quando conviene</h3>
+        <ul>
+          <li>Quando il backend espone una OpenAPI stabile.</li>
+          <li>Quando serve un client tipizzato per test, script o integrazioni.</li>
+          <li>Quando si vuole mostrare la relazione tra contratto API e codice Python generato.</li>
         </ul>
       </section>
 
@@ -274,6 +343,20 @@ for item in dati["items"]:
             </a>
             <br>
             Percorso ufficiale per installazione, prime route, parametri, body, errori, response model, dipendenze e sicurezza.
+          </li>
+          <li>
+            <a href="https://github.com/openapi-generators/openapi-python-client" target="_blank" rel="noopener noreferrer">
+              openapi-python-client
+            </a>
+            <br>
+            Generatore Python per creare client moderni da documenti OpenAPI 3.0 e 3.1.
+          </li>
+          <li>
+            <a href="https://www.alphavantage.co/documentation/" target="_blank" rel="noopener noreferrer">
+              Alpha Vantage - API Documentation
+            </a>
+            <br>
+            Documentazione ufficiale per gli endpoint `OVERVIEW` e `INCOME_STATEMENT`, utile come sostituto del vecchio esempio finanziario.
           </li>
         </ul>
       </section>

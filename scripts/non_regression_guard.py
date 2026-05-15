@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
 from html import unescape
 from pathlib import Path
@@ -11,6 +12,7 @@ from typing import Iterable
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_LOCK_DIR = ROOT / "tests" / "non-regression" / "locks"
+M3_KEYCLOAK_SMOKE = ROOT / "tests" / "non-regression" / "m3_keycloak_smoke.py"
 
 TAG_RE = re.compile(r"<[^>]+>")
 SPACE_RE = re.compile(r"\s+")
@@ -401,6 +403,14 @@ def cmd_check(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_m3_keycloak_smoke(args: argparse.Namespace) -> int:
+    if not M3_KEYCLOAK_SMOKE.exists():
+        print(f"[error] Smoke test script not found: {M3_KEYCLOAK_SMOKE}")
+        return 1
+    completed = subprocess.run([sys.executable, str(M3_KEYCLOAK_SMOKE)], cwd=ROOT, check=False)
+    return completed.returncode
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Lock/check non-regression for finalized module texts and images")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -416,6 +426,9 @@ def build_parser() -> argparse.ArgumentParser:
     p_check.add_argument("--id", help="Check a single lock id")
     p_check.add_argument("--lock-dir", default=str(DEFAULT_LOCK_DIR.relative_to(ROOT)), help="Directory where lock files are stored")
     p_check.set_defaults(func=cmd_check)
+
+    p_smoke = sub.add_parser("m3-keycloak-smoke", help="Run the M3 Keycloak client_credentials smoke test")
+    p_smoke.set_defaults(func=cmd_m3_keycloak_smoke)
     return parser
 
 
