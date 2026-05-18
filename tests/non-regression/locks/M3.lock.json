@@ -39,8 +39,6 @@
   "required_links": [
     "../index.html",
     "chapter-02.html",
-    "https://github.com/thimotyb/real-world-machine-learning/blob/python3/Importing_data_with_pandas.ipynb",
-    "https://github.com/thimotyb/real-world-machine-learning/blob/python3/REST_request_example.ipynb",
     "../examples/m3-keycloak-client-credentials/README.md",
     "../examples/m3-keycloak-client-credentials/notebook/M3-Keycloak-JWT-Demo.ipynb",
     "../examples/m3-keycloak-client-credentials/postman/README.md",
@@ -49,7 +47,6 @@
     "https://fastapi.tiangolo.com/environment-variables/",
     "https://fastapi.tiangolo.com/virtual-environments/",
     "https://fastapi.tiangolo.com/tutorial/",
-    "https://github.com/openapi-generators/openapi-python-client",
     "https://www.alphavantage.co/documentation/"
   ]
 }

@@ -5,9 +5,11 @@ This folder contains a collection that reproduces the full flow step by step aga
 ## Setup
 
 1. Start the example with `docker compose up --build`.
-2. Import the environment file.
-3. Import the collection file.
+2. Import the environment file first.
+3. Import the collection file second.
 4. Select the `M3 Keycloak JWT demo` environment.
+
+If Postman shows empty URL fields after import, re-import the environment first and then the collection. The requests rely on environment variables for the base URLs and on host/port variables to render the endpoints clearly in the client.
 
 ## Step by step
 
