@@ -240,7 +240,23 @@ print(indicators.get('annualReports', [])[0].get('fiscalDateEnding'))</code></pr
           <li>Handling Errors e Response Model.</li>
           <li>Dependencies e Security.</li>
         </ul>
-        <h3>13.1 Esempio completo: Keycloak + JWT</h3>
+        <h3>13.1 Tour rapido della dashboard Keycloak</h3>
+        <p>Nel laboratorio M3 conviene fare prima un giro essenziale della console di amministrazione di Keycloak, così è più facile collegare la teoria OAuth2 e JWT ai punti in cui si configurano davvero clienti, utenti e permessi.</p>
+        <ul>
+          <li><strong>Realm:</strong> è il contenitore logico dell'ambiente. Nel demo usiamo il realm `m3-jwt` come spazio isolato di configurazione.</li>
+          <li><strong>Clients:</strong> qui si registrano le applicazioni che chiedono token a Keycloak. Nel nostro caso c'è il client `m3-fastapi-client` usato dal flusso `client_credentials`.</li>
+          <li><strong>Users:</strong> elenco degli utenti gestiti nel realm. Serve per capire come Keycloak separa identità umane e client applicativi.</li>
+          <li><strong>Roles:</strong> ruoli assegnabili a utenti o client, utili per modellare permessi e autorizzazioni.</li>
+          <li><strong>Sessions e Events:</strong> mostrano chi si è autenticato, quali sessioni sono attive e quali eventi di login o errore sono stati registrati.</li>
+          <li><strong>Realm settings:</strong> raccoglie configurazioni generali come login, token, sicurezza e comportamento del realm.</li>
+        </ul>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/image.png" alt="Screenshot della pagina client di Keycloak con il client m3-fastapi-client e le credenziali usate per l'autenticazione.">
+          <figcaption><strong>Figura M3.1.</strong> Esempio della scheda client in Keycloak: qui si riconoscono il <code>clientId</code> e la sezione <code>Credentials</code> dove si legge il <code>client secret</code> usato dal demo.</figcaption>
+        </figure>
+        <p>Nello screenshot il <code>clientId</code> è visibile nella scheda <code>Settings</code>; il <code>client secret</code> si trova invece nella scheda <code>Credentials</code> dello stesso client.</p>
+        <p>Il punto pratico è riconoscere dove si crea il client, dove si legge il secret, dove si controllano gli utenti e dove si verifica che il token emesso sia coerente con il realm e con l'applicazione prevista.</p>
+        <h3>13.2 Esempio completo: Keycloak + JWT</h3>
         <p>Per un laboratorio separato dal tutorial base puoi usare l'esempio completo in <code>examples/m3-keycloak-client-credentials</code>. Include Keycloak avviato localmente dalla distribuzione ufficiale, un server FastAPI protetto da Bearer JWT, un client Python con flusso <code>client_credentials</code>, un notebook e una collezione Postman.</p>
         <ul>
           <li>
@@ -265,8 +281,14 @@ print(indicators.get('annualReports', [])[0].get('fiscalDateEnding'))</code></pr
             Guida operativa per riprodurre il token flow e la chiamata al backend protetto.
           </li>
         </ul>
-        <h3>13.2 Flusso OAuth2 e JWT</h3>
+        <h3>13.3 Flusso OAuth2 e JWT</h3>
         <p>Il client non chiama direttamente l'API: prima ottiene un access token da Keycloak con <code>client_credentials</code>, poi lo invia nell'header <code>Authorization: Bearer</code>. Il backend FastAPI scarica le chiavi pubbliche del realm, verifica firma e issuer del JWT e accetta solo token emessi per il client atteso.</p>
+        <h3>13.4 Sequence diagram del flusso protetto</h3>
+        <p>Questo diagramma mostra il percorso completo di una richiesta a <code>GET /orders</code>: il client chiede il token a Keycloak, invia la richiesta con <code>Bearer</code>, il server valida il JWT e restituisce la lista delle testate ordine.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/m3-orders-sequence.svg" alt="Sequence diagram del flusso protetto: Client Python, Keycloak e FastAPI Orders API con richiesta token, validazione JWT e risposta con la lista ordini.">
+          <figcaption><strong>Figura M3.2.</strong> Flusso protetto dell'endpoint <code>GET /orders</code>: il client ottiene il token da Keycloak, chiama la API con <code>Bearer</code> e FastAPI valida JWT, issuer e client atteso prima di rispondere.</figcaption>
+        </figure>
       </section>
 
       <section class="panel">

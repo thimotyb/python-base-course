@@ -1,0 +1,38 @@
+@startuml
+title M3 - Sequence del flusso protetto `GET /orders`
+
+hide footbox
+autonumber
+
+skinparam backgroundColor #f6f7f2
+skinparam shadowing false
+skinparam sequence {
+  ArrowColor #005f59
+  LifeLineBorderColor #bfc7c0
+  LifeLineBackgroundColor #ffffff
+  ParticipantBackgroundColor #202620
+  ParticipantBorderColor #202620
+  ParticipantFontColor #ffffff
+  ActorBackgroundColor #202620
+  ActorBorderColor #202620
+  ActorFontColor #ffffff
+  BoxBorderColor #7fc8c1
+  BoxBackgroundColor #eef5f4
+}
+
+participant "Client Python" as C
+participant "Keycloak" as K
+participant "FastAPI Orders API" as A
+
+C -> K: POST /token\n(grant_type=client_credentials)
+K --> C: access_token JWT
+C -> A: GET /orders\nAuthorization: Bearer <token>
+activate A
+A -> A: require_bearer_token()
+A -> K: GET JWKS (first validation or cache miss)
+K --> A: JWKS public key set
+A -> A: check azp == m3-fastapi-client
+A --> C: 200 OK\norder summaries JSON
+deactivate A
+
+@enduml

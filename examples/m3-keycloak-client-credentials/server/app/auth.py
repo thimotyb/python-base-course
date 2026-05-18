@@ -9,6 +9,7 @@ from jwt import PyJWKClient
 
 @lru_cache(maxsize=1)
 def get_settings() -> dict[str, str]:
+    # Keep the auth settings in one place so the example can be configured from env vars.
     return {
         "issuer": os.getenv("KEYCLOAK_ISSUER", "http://localhost:8080/realms/m3-jwt"),
         "jwks_url": os.getenv(
@@ -21,10 +22,12 @@ def get_settings() -> dict[str, str]:
 
 @lru_cache(maxsize=1)
 def get_jwk_client() -> PyJWKClient:
+    # Cache the JWKS client because the public keys are fetched repeatedly during token validation.
     return PyJWKClient(get_settings()["jwks_url"])
 
 
 def decode_access_token(token: str) -> dict:
+    # Verify the JWT signature and issuer using the public keys exposed by Keycloak.
     settings = get_settings()
     jwk_client = get_jwk_client()
     signing_key = jwk_client.get_signing_key_from_jwt(token)
@@ -44,6 +47,7 @@ def decode_access_token(token: str) -> dict:
             headers={"WWW-Authenticate": "Bearer"},
         ) from exc
 
+    # The demo accepts only tokens minted for the expected client application.
     if payload.get("azp") != settings["expected_azp"]:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
@@ -54,6 +58,7 @@ def decode_access_token(token: str) -> dict:
 
 
 def fetch_token(token_url: str, client_id: str, client_secret: str) -> dict:
+    # Helper kept for parity with the client example and for quick manual testing.
     response = requests.post(
         token_url,
         data={

@@ -7,11 +7,6 @@ This example shows a complete OAuth2 `client_credentials` flow with:
 - a Python client that fetches a token, reads orders, and creates a new one
 - a Postman collection that walks through the same steps
 
-## Published copy
-
-Some files from this example are also published under `site/examples/m3-keycloak-client-credentials/` so they can be reached when the static site is served locally from `site/`.
-The source of truth for the example remains this folder under `examples/`.
-
 ## What this example demonstrates
 
 1. Keycloak issues an access token using the OAuth2 `client_credentials` grant.
@@ -28,12 +23,6 @@ The source of truth for the example remains this folder under `examples/`.
 - `server/`: FastAPI resource server
 - `client/`: script that authenticates and calls the API
 - `postman/`: collection and playbook
-
-When browsing the course site locally, the published copies are available at:
-
-- `site/examples/m3-keycloak-client-credentials/README.md`
-- `site/examples/m3-keycloak-client-credentials/notebook/M3-Keycloak-JWT-Demo.ipynb`
-- `site/examples/m3-keycloak-client-credentials/postman/README.md`
 
 ## Quick start
 

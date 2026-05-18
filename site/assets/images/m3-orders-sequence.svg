@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Sequence diagram del flusso protetto M3</title>
+  <desc id="desc">Client Python ottiene un token da Keycloak, chiama FastAPI Orders API con Bearer token, e il server valida JWT, issuer e client atteso prima di rispondere.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f6f7f2; }
+      .frame { fill: #ffffff; stroke: #d9ded7; stroke-width: 2; }
+      .header { fill: #202620; }
+      .header-text { font: 700 22px "Space Grotesk", Arial, sans-serif; fill: #ffffff; }
+      .title { font: 700 32px "Space Grotesk", Arial, sans-serif; fill: #152023; }
+      .subtitle { font: 500 18px "Source Serif 4", Georgia, serif; fill: #65706e; }
+      .actor-name { font: 700 22px "Space Grotesk", Arial, sans-serif; fill: #ffffff; }
+      .actor-box { fill: #202620; }
+      .lifeline { stroke: #bfc7c0; stroke-width: 2; stroke-dasharray: 10 10; }
+      .msg { stroke: #005f59; stroke-width: 4; fill: none; marker-end: url(#arrowhead); }
+      .msg-return { stroke: #8f3f46; stroke-width: 4; fill: none; stroke-dasharray: 10 8; marker-end: url(#arrowhead-return); }
+      .msg-text { font: 600 17px "Space Grotesk", Arial, sans-serif; fill: #152023; }
+      .note { fill: #eef5f4; stroke: #7fc8c1; stroke-width: 2; }
+      .note-text { font: 500 16px "Source Serif 4", Georgia, serif; fill: #1f2a2d; }
+      .small { font: 500 15px "Source Serif 4", Georgia, serif; fill: #65706e; }
+      .chip { fill: #eff6f5; stroke: #c5e6e1; stroke-width: 1.5; }
+      .chip-text { font: 600 15px "Space Grotesk", Arial, sans-serif; fill: #005f59; }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#005f59" />
+    </marker>
+    <marker id="arrowhead-return" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#8f3f46" />
+    </marker>
+  </defs>
+
+  <rect class="bg" width="1600" height="900" />
+  <rect class="frame" x="26" y="26" width="1548" height="848" rx="22" />
+
+  <text class="title" x="70" y="84">M3 - Sequence del flusso protetto `GET /orders`</text>
+  <text class="subtitle" x="70" y="118">Il client ottiene un token da Keycloak, chiama la API con Bearer token e il server valida JWT, issuer e client atteso.</text>
+
+  <rect class="header" x="130" y="160" width="260" height="70" rx="16" />
+  <text class="actor-name" x="260" y="203" text-anchor="middle">Client Python</text>
+
+  <rect class="header" x="670" y="160" width="260" height="70" rx="16" />
+  <text class="actor-name" x="800" y="203" text-anchor="middle">Keycloak</text>
+
+  <rect class="header" x="1210" y="160" width="260" height="70" rx="16" />
+  <text class="actor-name" x="1340" y="203" text-anchor="middle">FastAPI Orders API</text>
+
+  <line class="lifeline" x1="260" y1="230" x2="260" y2="820" />
+  <line class="lifeline" x1="800" y1="230" x2="800" y2="820" />
+  <line class="lifeline" x1="1340" y1="230" x2="1340" y2="820" />
+
+  <text class="msg-text" x="70" y="274">1</text>
+  <line class="msg" x1="260" y1="270" x2="800" y2="270" />
+  <text class="msg-text" x="510" y="255" text-anchor="middle">POST /token</text>
+  <rect class="chip" x="445" y="282" width="230" height="34" rx="17" />
+  <text class="chip-text" x="560" y="305" text-anchor="middle">grant_type=client_credentials</text>
+
+  <text class="msg-text" x="70" y="347">2</text>
+  <line class="msg-return" x1="800" y1="340" x2="260" y2="340" />
+  <text class="msg-text" x="510" y="325" text-anchor="middle">access_token JWT</text>
+
+  <text class="msg-text" x="70" y="434">3</text>
+  <line class="msg" x1="260" y1="430" x2="1340" y2="430" />
+  <text class="msg-text" x="800" y="415" text-anchor="middle">GET /orders</text>
+  <text class="small" x="800" y="454" text-anchor="middle">Authorization: Bearer &lt;token&gt;</text>
+
+  <rect class="note" x="520" y="500" width="560" height="150" rx="18" />
+  <text class="msg-text" x="550" y="538">4. Dependency di autenticazione</text>
+  <text class="note-text" x="550" y="570">require_bearer_token() estrae l'header Authorization.</text>
+  <text class="note-text" x="550" y="598">decode_access_token() verifica firma, issuer e chiave pubblica JWKS.</text>
+  <text class="note-text" x="550" y="626">Se il token non è valido, la richiesta termina con 401 o 403.</text>
+
+  <text class="msg-text" x="70" y="705">5</text>
+  <line class="msg" x1="800" y1="700" x2="1340" y2="700" />
+  <text class="msg-text" x="1070" y="685" text-anchor="middle">GET JWKS</text>
+  <text class="small" x="1070" y="720" text-anchor="middle">solo alla prima verifica o a cache miss</text>
+
+  <text class="msg-text" x="70" y="790">6</text>
+  <line class="msg" x1="1340" y1="785" x2="260" y2="785" />
+  <text class="msg-text" x="800" y="770" text-anchor="middle">200 OK</text>
+  <text class="small" x="800" y="809" text-anchor="middle">Order summaries JSON</text>
+
+</svg>

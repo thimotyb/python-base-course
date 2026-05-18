@@ -80,6 +80,8 @@ def main() -> int:
     keycloak_bin = install_dir / "bin" / ("kc.bat" if sys.platform.startswith("win") else "kc.sh")
     if not keycloak_bin.exists():
         raise FileNotFoundError(f"Keycloak launcher not found: {keycloak_bin}")
+    if not sys.platform.startswith("win"):
+        keycloak_bin.chmod(keycloak_bin.stat().st_mode | 0o111)
 
     print("Starting Keycloak in development mode with realm import...")
     os.execvpe(str(keycloak_bin), [str(keycloak_bin), "start-dev", "--import-realm"], env)
