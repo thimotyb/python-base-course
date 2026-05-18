@@ -11,6 +11,8 @@ This folder contains a collection that reproduces the full flow step by step aga
 
 If Postman shows empty URL fields after import, re-import the environment first and then the collection. The requests rely on environment variables for the base URLs and on host/port variables to render the endpoints clearly in the client.
 
+The scripts store `access_token`, `order_id`, and `created_order_id` in the selected environment, so you should not need to copy them manually after running the requests.
+
 ## Step by step
 
 1. Run `01 - Get access token`.

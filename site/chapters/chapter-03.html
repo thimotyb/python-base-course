@@ -251,7 +251,7 @@ print(indicators.get('annualReports', [])[0].get('fiscalDateEnding'))</code></pr
           <li><strong>Realm settings:</strong> raccoglie configurazioni generali come login, token, sicurezza e comportamento del realm.</li>
         </ul>
         <figure class="module-figure" data-zoomable>
-          <img src="../assets/images/image.png" alt="Screenshot della pagina client di Keycloak con il client m3-fastapi-client e le credenziali usate per l'autenticazione.">
+          <img src="../assets/images/m3-keycloak-client-settings.png" alt="Screenshot della pagina client di Keycloak con il client m3-fastapi-client e le credenziali usate per l'autenticazione.">
           <figcaption><strong>Figura M3.1.</strong> Esempio della scheda client in Keycloak: qui si riconoscono il <code>clientId</code> e la sezione <code>Credentials</code> dove si legge il <code>client secret</code> usato dal demo.</figcaption>
         </figure>
         <p>Nello screenshot il <code>clientId</code> è visibile nella scheda <code>Settings</code>; il <code>client secret</code> si trova invece nella scheda <code>Credentials</code> dello stesso client.</p>
@@ -283,11 +283,19 @@ print(indicators.get('annualReports', [])[0].get('fiscalDateEnding'))</code></pr
         </ul>
         <h3>13.3 Flusso OAuth2 e JWT</h3>
         <p>Il client non chiama direttamente l'API: prima ottiene un access token da Keycloak con <code>client_credentials</code>, poi lo invia nell'header <code>Authorization: Bearer</code>. Il backend FastAPI scarica le chiavi pubbliche del realm, verifica firma e issuer del JWT e accetta solo token emessi per il client atteso.</p>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/m3-postman-token-request.png" alt="Screenshot di Postman nella richiesta di ottenimento del token con client_credentials verso Keycloak.">
+          <figcaption><strong>Figura M3.2.</strong> Richiesta del token in Postman con <code>client_credentials</code>: questo è il primo passo prima di chiamare la API Ordini protetta.</figcaption>
+        </figure>
+        <figure class="module-figure" data-zoomable>
+          <img src="../assets/images/m3-postman-get-orders-with-token.png" alt="Screenshot di Postman nella chiamata GET /orders con il token Bearer inserito nell'header Authorization.">
+          <figcaption><strong>Figura M3.3.</strong> Chiamata autenticata a <code>GET /orders</code>: il token ottenuto prima viene inserito nell'header <code>Authorization: Bearer</code>.</figcaption>
+        </figure>
         <h3>13.4 Sequence diagram del flusso protetto</h3>
         <p>Questo diagramma mostra il percorso completo di una richiesta a <code>GET /orders</code>: il client chiede il token a Keycloak, invia la richiesta con <code>Bearer</code>, il server valida il JWT e restituisce la lista delle testate ordine.</p>
         <figure class="module-figure" data-zoomable>
           <img src="../assets/images/m3-orders-sequence.svg" alt="Sequence diagram del flusso protetto: Client Python, Keycloak e FastAPI Orders API con richiesta token, validazione JWT e risposta con la lista ordini.">
-          <figcaption><strong>Figura M3.2.</strong> Flusso protetto dell'endpoint <code>GET /orders</code>: il client ottiene il token da Keycloak, chiama la API con <code>Bearer</code> e FastAPI valida JWT, issuer e client atteso prima di rispondere.</figcaption>
+          <figcaption><strong>Figura M3.4.</strong> Flusso protetto dell'endpoint <code>GET /orders</code>: il client ottiene il token da Keycloak, chiama la API con <code>Bearer</code> e FastAPI valida JWT, issuer e client atteso prima di rispondere.</figcaption>
         </figure>
       </section>
 
