@@ -1,0 +1,10 @@
+# INstall pip
+python -m pip --version
+sudo apt update
+sudo apt install python3-pip
+
+python3 --version
+sudo apt install python3.x-venv
+
+python3 -m venv .venv
+source .venv/bin/activate
