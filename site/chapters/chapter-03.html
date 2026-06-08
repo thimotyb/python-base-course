@@ -304,6 +304,7 @@ print(indicators.get('annualReports', [])[0].get('fiscalDateEnding'))</code></pr
         <p>Quando esiste una definizione OpenAPI, un client Python può essere generato automaticamente invece di essere scritto a mano. Nel caso di FastAPI questo è comodo perché il JSON della specifica si prende direttamente dall'URL esposto dal server, senza passaggi intermedi.</p>
         <h3>14.1 OpenAPI e client generator</h3>
         <p>Il flusso tipico parte da `http://127.0.0.1:8000/openapi.json` o da un URL equivalente se l'app gira su un host diverso. Uno strumento come <code>openapi-python-client</code> legge quella specifica e crea un pacchetto Python con una classe client, modelli dati e funzioni per ogni endpoint.</p>
+        <p>Per un tutorial introduttivo su OpenAPI 3.0 puoi partire da <a href="https://support.smartbear.com/swagger/studio/docs/en/get-started/openapi-3-0-tutorial.html" target="_blank" rel="noopener noreferrer">OpenAPI 3.0 Tutorial</a>.</p>
         <h3>14.2 Esempio minimo</h3>
         <pre class="code-sample"><code># scarico la specifica direttamente dal server FastAPI
 curl http://127.0.0.1:8000/openapi.json -o openapi.json

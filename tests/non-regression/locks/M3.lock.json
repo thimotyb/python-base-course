@@ -25,23 +25,21 @@
     "Sitografia",
     "1.1 Cos'è un'API",
     "1.2 API come interfaccia tra sistemi",
-    "1.3 Perché si usano",
-    "2.1 Architettura REST",
-    "2.2 Concetti chiave",
-    "3.1 GET",
-    "3.2 POST",
-    "3.3 PUT",
-    "3.4 DELETE",
-    "4.1 Struttura",
-    "4.2 JSON e dizionari Python"
+    "1.3 Perché si usano"
   ],
-  "required_images": [],
+  "required_images": [
+    "../assets/images/m3-keycloak-client-settings.png",
+    "../assets/images/m3-postman-token-request.png",
+    "../assets/images/m3-postman-get-orders-with-token.png",
+    "../assets/images/m3-orders-sequence.svg"
+  ],
   "required_links": [
     "../index.html",
     "chapter-02.html",
-    "../examples/m3-keycloak-client-credentials/README.md",
     "../examples/m3-keycloak-client-credentials/notebook/M3-Keycloak-JWT-Demo.ipynb",
+    "../examples/m3-keycloak-client-credentials/README.md",
     "../examples/m3-keycloak-client-credentials/postman/README.md",
+    "https://support.smartbear.com/swagger/studio/docs/en/get-started/openapi-3-0-tutorial.html",
     "https://fastapi.tiangolo.com/python-types/",
     "https://fastapi.tiangolo.com/async/",
     "https://fastapi.tiangolo.com/environment-variables/",

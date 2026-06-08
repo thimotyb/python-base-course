@@ -23,6 +23,7 @@ This example shows a complete OAuth2 `client_credentials` flow with:
 - `server/`: FastAPI resource server
 - `client/`: script that authenticates and calls the API
 - `postman/`: collection and playbook
+- `openapi-python-client/`: ready-to-run client example and OpenAPI snapshot
 
 ## Quick start
 
@@ -94,3 +95,4 @@ Realm:
 - The API verifies the JWT using the realm public keys exposed by Keycloak.
 - The protected endpoint checks the `azp` claim and accepts only tokens minted for the configured client.
 - If you prefer Docker, `docker-compose.yml` remains available as an alternative launch path.
+- For a focused OpenAPI client tutorial and example, see `openapi-python-client/` in this folder.

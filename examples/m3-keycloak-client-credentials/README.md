@@ -28,12 +28,14 @@ The source of truth for the example remains this folder under `examples/`.
 - `server/`: FastAPI resource server
 - `client/`: script that authenticates and calls the API
 - `postman/`: collection and playbook
+- `openapi-python-client/`: ready-to-run client example and OpenAPI snapshot
 
 When browsing the course site locally, the published copies are available at:
 
 - `site/examples/m3-keycloak-client-credentials/README.md`
 - `site/examples/m3-keycloak-client-credentials/notebook/M3-Keycloak-JWT-Demo.ipynb`
 - `site/examples/m3-keycloak-client-credentials/postman/README.md`
+- `site/examples/m3-keycloak-client-credentials/openapi-python-client/README.md`
 
 ## Quick start
 
