@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+      xmlns:db="http://www.mulesoft.org/schema/mule/db"
+      xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+      xmlns:http="http://www.mulesoft.org/schema/mule/http"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="
+        http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+        http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+        http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+        http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+
+  <configuration-properties file="config/application.yaml"/>
+
+  <http:listener-config name="httpListenerConfig">
+    <http:listener-connection host="${http.listener.host}" port="${http.listener.port}"/>
+  </http:listener-config>
+
+  <db:config name="sqliteDbConfig">
+    <db:generic-connection url="${sqlite.jdbcUrl}" driverClassName="org.sqlite.JDBC"/>
+  </db:config>
+
+  <http:request-config name="sharepointMockRequest" protocol="HTTP" host="${sharepoint.mock.host}" port="${sharepoint.mock.port}" basePath="/v1.0">
+    <http:request-connection host="${sharepoint.mock.host}" port="${sharepoint.mock.port}"/>
+  </http:request-config>
+
+  <!--
+    Scaffold only:
+    - wire the DB connector to the SQLite demo database;
+    - transform the result set with the DataWeave scripts in src/main/resources/dw;
+    - replace the placeholder HTTP requests with the real Google Sheets and SharePoint connectors.
+  -->
+
+  <flow name="read-orders-from-sqlite">
+    <http:listener config-ref="httpListenerConfig" path="/sync" allowedMethods="POST"/>
+    <db:select config-ref="sqliteDbConfig">
+      <db:sql><![CDATA[
+        SELECT
+          o.id AS order_id,
+          o.customer,
+          o.order_date,
+          o.status,
+          l.id AS line_id,
+          l.sku,
+          l.description,
+          l.quantity,
+          l.unit_price
+        FROM orders o
+        JOIN order_lines l ON l.order_id = o.id
+        ORDER BY o.id, l.id
+      ]]></db:sql>
+    </db:select>
+    <ee:transform doc:name="Build sheet payload">
+      <ee:message>
+        <ee:set-payload resource="dw/orders-to-sheet.dwl"/>
+      </ee:message>
+    </ee:transform>
+    <logger level="INFO" message="Prepared Google Sheets payload #[payload]"/>
+  </flow>
+
+  <flow name="transform-orders-for-sharepoint">
+    <http:listener config-ref="httpListenerConfig" path="/document" allowedMethods="POST"/>
+    <db:select config-ref="sqliteDbConfig">
+      <db:sql><![CDATA[
+        SELECT
+          o.id AS order_id,
+          o.customer,
+          o.order_date,
+          o.status,
+          l.sku,
+          l.description,
+          l.quantity,
+          l.unit_price
+        FROM orders o
+        JOIN order_lines l ON l.order_id = o.id
+        ORDER BY o.id, l.id
+      ]]></db:sql>
+    </db:select>
+    <ee:transform doc:name="Build SharePoint document">
+      <ee:message>
+        <ee:set-payload resource="dw/orders-to-sharepoint-document.dwl"/>
+      </ee:message>
+    </ee:transform>
+    <http:request config-ref="sharepointMockRequest" method="POST" path="/sites/${sharepoint.siteId}/drive/root:/Shared Documents/order-summary.html:/content">
+      <http:body><![CDATA[#[payload.content]]]></http:body>
+    </http:request>
+    <logger level="INFO" message="Mock SharePoint response #[payload]"/>
+  </flow>
+
+</mule>

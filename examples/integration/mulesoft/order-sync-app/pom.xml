@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.example.integration</groupId>
+  <artifactId>order-sync-app</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>mule-application</packaging>
+
+  <name>order-sync-app</name>
+  <description>Scaffold MuleSoft app that reads orders from SQLite and pushes them to Google Sheets and SharePoint.</description>
+
+  <properties>
+    <mule.maven.plugin.version>4.1.1</mule.maven.plugin.version>
+    <mule.version>4.6.0</mule.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.mule.tools.maven</groupId>
+        <artifactId>mule-maven-plugin</artifactId>
+        <version>${mule.maven.plugin.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,19 @@
+http:
+  listener:
+    host: "0.0.0.0"
+    port: "8081"
+
+sqlite:
+  jdbcUrl: "jdbc:sqlite:../sqlite/orders.db"
+
+google:
+  sheetId: "replace-with-real-sheet-id"
+  range: "Orders!A1"
+
+sharepoint:
+  mock:
+    host: "127.0.0.1"
+    port: "8090"
+  siteId: "replace-with-real-site-id"
+  driveId: "replace-with-real-drive-id"
+  folderPath: "/Shared Documents"
